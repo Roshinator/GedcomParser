@@ -99,7 +99,7 @@ namespace GedcomParser.Parsers
                     Divorce = divorce,
                     Relation = relation,
                     Note = note
-                });
+                }); 
                 resultContainer.SpouseRelations.Add(new SpouseRelation
                 {
                     FamilyId = famChunk.Id,
