@@ -131,11 +131,45 @@ namespace GedcomParser.Parsers
                     case "PAGE":
                     case "RIN":
                     case "SOUR":
-                        resultContainer.Warnings.Add($"Skipped Person Type='{chunk.Type}'");
+                        try
+                        {
+                            System.Text.StringBuilder s = new(/*chunk.Data + ", "*/);
+                            foreach (var str in chunk.SubChunks.Select(c => c.Data))
+                            {
+                                s.Append(str);
+                                s.Append(", ");
+                            }
+                            if (s.Length > 2)
+                            {
+                                s.Remove(s.Length - 2, 2);
+                            }
+                            person.Extras.Add(s.ToString());
+                        }
+                        catch (Exception)
+                        {
+                            resultContainer.Warnings.Add($"Skipped Person Type='{chunk.Type}'");
+                        }
                         break;
 
                     default:
-                        resultContainer.Errors.Add($"Failed to handle Person Type='{chunk.Type}'");
+                        try
+                        {
+                            System.Text.StringBuilder s = new(/*chunk.Data + ", "*/);
+                            foreach (var str in chunk.SubChunks.Select(c => c.Data))
+                            {
+                                s.Append(str);
+                                s.Append(", ");
+                            }
+                            if (s.Length > 2)
+                            {
+                                s.Remove(s.Length - 2, 2);
+                            }
+                            person.Extras.Add(s.ToString());
+                        }
+                        catch (Exception)
+                        {
+                            resultContainer.Errors.Add($"Failed to handle Person Type='{chunk.Type}'");
+                        }
                         break;
                 }
             }

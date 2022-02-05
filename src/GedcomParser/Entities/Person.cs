@@ -28,5 +28,6 @@ namespace GedcomParser.Entities
         public List<DatePlace> Immigrated { get; set; } = new List<DatePlace>();
         public DatePlace BecomingCitizen { get; set; }
         public DatePlace Graduation { get; set; }
+        public List<string> Extras { get; set; } = new List<string>();
     }
 }
